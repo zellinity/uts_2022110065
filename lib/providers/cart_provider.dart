@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:uts_2022110065/providers/product_provider.dart';
 
 class CartProvider with ChangeNotifier {
-  int _cartCount = 0;
+  final List<Product> _cartProducts = [];
 
-  int get cartCount => _cartCount;
+  List<Product> get cartProducts => _cartProducts;
 
-  void incrementCartCount() {
-    _cartCount++;
+  void addToCart(Product product) {
+    _cartProducts.add(product);
     notifyListeners();
   }
+
+  void incrementCartCount(Product product) {
+    addToCart(product);
+  }
+
+  int get cartCount => _cartProducts.length;
 }

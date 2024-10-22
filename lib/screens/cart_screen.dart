@@ -11,11 +11,107 @@ class CartScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Cart'),
       ),
-      body: Center(
-        child: Consumer<CartProvider>(
-          builder: (context, cartProvider, child) {
-            return Text('Cart Count: ${cartProvider.cartCount}');
-          },
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            Expanded(
+              child: Consumer<CartProvider>(
+                builder: (context, cartProvider, child) {
+                  return ListView.builder(
+                    itemCount: cartProvider.cartCount,
+                    itemBuilder: (context, index) {
+                      final product = cartProvider.cartProducts[index];
+                      return CartItem(
+                        title: product.name,
+                        price: product.price,
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Total: Rp 0',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                    },
+                    child: const Text('Checkout'),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CartItem extends StatelessWidget {
+  final String title;
+  final String price;
+
+  const CartItem({
+    Key? key,
+    required this.title,
+    required this.price,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  price,
+                  style: const TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                  },
+                  child: const Icon(Icons.remove),
+                ),
+                const SizedBox(width: 8),
+                Text('0'),
+                const SizedBox(width: 8),
+                ElevatedButton(
+                  onPressed: () {
+                  },
+                  child: const Icon(Icons.add),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
