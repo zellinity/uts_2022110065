@@ -62,6 +62,7 @@ class ProductScreen extends StatelessWidget {
                   ),
                 ],
               ),
+              
               const SizedBox(height: 16),
               //tombol beli skrg
               ElevatedButton(
