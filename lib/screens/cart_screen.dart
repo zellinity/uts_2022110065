@@ -19,12 +19,16 @@ class CartScreen extends StatelessWidget {
               child: Consumer<CartProvider>(
                 builder: (context, cartProvider, child) {
                   return ListView.builder(
-                    itemCount: cartProvider.cartCount,
+                    itemCount: cartProvider.cartProducts.length,
                     itemBuilder: (context, index) {
                       final product = cartProvider.cartProducts[index];
                       return CartItem(
                         title: product.name,
                         price: product.price,
+                        quantity: product.total,
+                        onRemove: () {
+                          cartProvider.removeFromCart(product);
+                        },
                       );
                     },
                   );
@@ -36,15 +40,16 @@ class CartScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    'Total: Rp 0',
-                    style: TextStyle(
+                  Text(
+                    'Total: Rp ${context.watch<CartProvider>().totalPrice}',
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   ElevatedButton(
                     onPressed: () {
+                      // Implementasi checkout
                     },
                     child: const Text('Checkout'),
                   ),
@@ -61,12 +66,16 @@ class CartScreen extends StatelessWidget {
 class CartItem extends StatelessWidget {
   final String title;
   final String price;
+  final String quantity;
+  final VoidCallback onRemove;
 
   const CartItem({
-    super.key,
+    Key? key,
     required this.title,
     required this.price,
-  });
+    required this.quantity,
+    required this.onRemove,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -87,29 +96,22 @@ class CartItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  price,
+                  'Price: $price',
+                  style: const TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                Text(
+                  'Quantity: $quantity',
                   style: const TextStyle(
                     fontSize: 16,
                   ),
                 ),
               ],
             ),
-            Row(
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                  },
-                  child: const Icon(Icons.remove),
-                ),
-                const SizedBox(width: 8),
-                const Text('0'),
-                const SizedBox(width: 8),
-                ElevatedButton(
-                  onPressed: () {
-                  },
-                  child: const Icon(Icons.add),
-                ),
-              ],
+            IconButton(
+              onPressed: onRemove,
+              icon: const Icon(Icons.remove_circle, color: Colors.red),
             ),
           ],
         ),

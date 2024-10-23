@@ -7,13 +7,44 @@ class CartProvider with ChangeNotifier {
   List<Product> get cartProducts => _cartProducts;
 
   void addToCart(Product product) {
-    _cartProducts.add(product);
+    int existingProductIndex = _cartProducts.indexWhere(
+      (p) => p.name == product.name,
+    );
+
+    if (existingProductIndex != -1) {
+      int newQuantity = int.parse(_cartProducts[existingProductIndex].total) + int.parse(product.total);
+      double price = double.parse(_cartProducts[existingProductIndex].price.replaceAll('Rp ', ''));
+      _cartProducts[existingProductIndex] = Product(
+        name: _cartProducts[existingProductIndex].name,
+        price: _cartProducts[existingProductIndex].price,
+        imagePath: _cartProducts[existingProductIndex].imagePath,
+        total: newQuantity.toString(),
+      );
+    } else {
+      _cartProducts.add(product);
+    }
     notifyListeners();
   }
 
-  void incrementCartCount(Product product) {
-    addToCart(product);
+  void removeFromCart(Product product) {
+    _cartProducts.remove(product);
+    notifyListeners();
   }
 
-  int get cartCount => _cartProducts.length;
+  int get cartCount {
+    int totalQuantity = 0;
+    for (var product in _cartProducts) {
+      totalQuantity += int.parse(product.total);
+    }
+    return totalQuantity;
+  }
+
+  double get totalPrice {
+    double total = 0.0;
+    for (var product in _cartProducts) {
+      double price = double.parse(product.price.replaceAll('Rp', ''));
+      total += price * int.parse(product.total);
+    }
+    return total;
+  }
 }

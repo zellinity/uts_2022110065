@@ -4,18 +4,19 @@ class Product {
   final String name;
   final String price;
   final String imagePath;
-  Product({required this.name, required this.price, required this.imagePath});
+  final String total;
+  Product({required this.name, required this.price, required this.imagePath, required this.total});
 
 }
 
 class ProductProvider extends ChangeNotifier {
   final List<Product> _products = [
-    Product(name: 'Product 1', price: 'Rp 134.000', imagePath: 'distrogmbr/screammous.png'),
-    Product(name: 'Product 2', price: 'Rp 325.000', imagePath: 'assets/images/product1.png'),
-    Product(name: 'Product 3', price: 'Rp 233.000', imagePath: 'assets/images/product1.png'),
-    Product(name: 'Product 4', price: 'Rp 123.000', imagePath: 'assets/images/product1.png'),
-    Product(name: 'Product 5', price: 'Rp 98.000', imagePath: 'assets/images/product1.png'),
-    Product(name: 'Product 6', price: 'Rp 110.000', imagePath: 'assets/images/product1.png'),
+    Product(name: 'Screammous T-Shirt', price: 'Rp 134.000', imagePath: 'distrogmbr/screammous.png', total: '0'),
+    Product(name: 'Otheruk Jacket', price: 'Rp 325.000', imagePath: 'distrogmbr/otherrukjkt.jpg', total: '0'),
+    Product(name: 'Dhgate Jeans', price: 'Rp 233.000', imagePath: 'distrogmbr/dhgatejeans.jpg', total: '0'),
+    Product(name: 'Foclis Hoodie', price: 'Rp 123.000', imagePath: 'distrogmbr/foclis.jpg', total: '0'),
+    Product(name: 'T-Shirt', price: 'Rp 98.000', imagePath: 'distrogmbr/kaospolos.jpg', total: '0'),
+    Product(name: 'Zara Shirt', price: 'Rp 110.000', imagePath: 'distrogmbr/zara.jpg', total: '0'),
   ];
 
   List<Product> _filteredProducts = [];

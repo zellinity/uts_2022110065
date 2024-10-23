@@ -34,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
           key: _formKey,
           child: Column(
             children: [
-              Image.asset('distrogmbr/screammous.png', height:500),
+              Image.asset('distrogmbr/logodistro.png', height:500),
               TextFormField(
                 controller: _emailController,
                 decoration: const InputDecoration(
@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   //     MaterialPageRoute(builder: (context) => HomeScreen()),
                   //   );
                   // }
-                  if(_emailController == email && _passwordController == password) {
+                  if(_emailController.text == email && _passwordController.text == password) {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (context) => HomeScreen()),

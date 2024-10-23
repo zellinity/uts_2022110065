@@ -100,7 +100,7 @@ class HomeScreen extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset(product.imagePath, height: 100),
+                              Image.asset(product.imagePath, height: 250),
                               const SizedBox(height: 8),
                               Text(
                                 product.name,
