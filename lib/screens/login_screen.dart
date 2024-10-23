@@ -9,9 +9,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  String email = 'admindistro@gmail.com';
+  String password = 'distrozellinity123';
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
 
   @override
   void dispose() {
@@ -32,6 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
           key: _formKey,
           child: Column(
             children: [
+              Image.asset('distrogmbr/screammous.png', height:500),
               TextFormField(
                 controller: _emailController,
                 decoration: const InputDecoration(
@@ -62,11 +65,19 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {
+                  // if (_formKey.currentState!.validate()) {
+                  //   Navigator.pushReplacement(
+                  //     context,
+                  //     MaterialPageRoute(builder: (context) => HomeScreen()),
+                  //   );
+                  // }
+                  if(_emailController == email && _passwordController == password) {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (context) => HomeScreen()),
                     );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Invalid email or password')));
                   }
                 },
                 child: const Text('Login'),

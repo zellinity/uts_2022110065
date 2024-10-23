@@ -63,8 +63,8 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
-              child: const Text(
+            const Center(
+              child: Text(
                 'Our Distro Products',
                 style: TextStyle(
                   fontSize: 24,

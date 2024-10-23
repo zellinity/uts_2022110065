@@ -51,7 +51,7 @@ class ProductScreen extends StatelessWidget {
                           child: const Icon(Icons.remove),
                         ),
                         const SizedBox(width: 8),
-                        Text('0'),
+                        const Text('0'),
                         const SizedBox(width: 8),
                         ElevatedButton(
                           onPressed: () {

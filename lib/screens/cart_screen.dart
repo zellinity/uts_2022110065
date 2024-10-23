@@ -63,10 +63,10 @@ class CartItem extends StatelessWidget {
   final String price;
 
   const CartItem({
-    Key? key,
+    super.key,
     required this.title,
     required this.price,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +102,7 @@ class CartItem extends StatelessWidget {
                   child: const Icon(Icons.remove),
                 ),
                 const SizedBox(width: 8),
-                Text('0'),
+                const Text('0'),
                 const SizedBox(width: 8),
                 ElevatedButton(
                   onPressed: () {
