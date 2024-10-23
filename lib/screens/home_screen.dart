@@ -15,6 +15,15 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text(
+          'Zellinity Store',
+          style: TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: Colors.grey,
         leading: Builder(
           builder: (context) => IconButton(
             icon: const Icon(Icons.menu),
@@ -38,15 +47,21 @@ class HomeScreen extends StatelessWidget {
           children: [
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.grey,
               ),
-              child: Text(
-                'Zellinity Store',
-                style: TextStyle(color: Colors.white, fontSize: 24),
+              child: Center(
+                child: Text(
+                  'Zellinity Store',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.logout),
+              leading: const Icon(Icons.logout, color: Colors.red),
               title: const Text('Logout'),
               onTap: () {
                 Navigator.pushReplacement(
@@ -67,8 +82,9 @@ class HomeScreen extends StatelessWidget {
               child: Text(
                 'Our Distro Products',
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 28,
                   fontWeight: FontWeight.bold,
+                  color: Colors.black87,
                 ),
               ),
             ),
@@ -94,29 +110,44 @@ class HomeScreen extends StatelessWidget {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                color: const Color.fromARGB(255, 69, 61, 61)
+                                    .withOpacity(0.3),
+                                spreadRadius: 3,
+                                blurRadius: 5,
+                                offset: const Offset(0, 3),
+                              ),
+                            ],
                           ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset(product.imagePath, height: 250),
+                              Image.asset(
+                                product.imagePath,
+                                height: 150,
+                                fit: BoxFit.cover,
+                              ),
                               const SizedBox(height: 8),
                               Text(
                                 product.name,
                                 style: const TextStyle(
-                                  fontSize: 16,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
                                 ),
                               ),
                               const SizedBox(height: 4),
                               Text(
                                 product.price,
                                 style: const TextStyle(
-                                  fontSize: 14,
+                                  fontSize: 16,
+                                  color: Colors.black87,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              const SizedBox(height: 4),
                             ],
                           ),
                         ),
@@ -136,9 +167,10 @@ class HomeScreen extends StatelessWidget {
             MaterialPageRoute(builder: (context) => const CartScreen()),
           );
         },
+        backgroundColor: Colors.grey,
         child: Stack(
           children: [
-            const Icon(Icons.shopping_cart),
+            const Icon(Icons.shopping_cart, size: 30),
             Positioned(
               right: 0,
               child: Consumer<CartProvider>(
@@ -171,8 +203,7 @@ class HomeScreen extends StatelessWidget {
           title: const Text('Search product'),
           content: TextField(
             controller: _searchController,
-            decoration:
-                const InputDecoration(hintText: 'Masukan nama produdct'),
+            decoration: const InputDecoration(hintText: 'Masukan nama produk'),
             onChanged: (value) {
               context.read<ProductProvider>().searchProducts(value);
             },

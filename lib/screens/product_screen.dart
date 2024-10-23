@@ -53,7 +53,8 @@ class _ProductScreenState extends State<ProductScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Center(
-                      child: Image.asset('distrogmbr/kaospolos.jpg', height: 200),
+                      // Use the product's imagePath here
+                      child: Image.asset(widget.product.imagePath, height: 200),
                     ),
                     const SizedBox(height: 16),
                     Text(
@@ -156,4 +157,3 @@ class _ProductScreenState extends State<ProductScreen> {
     );
   }
 }
-
